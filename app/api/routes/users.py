@@ -37,6 +37,12 @@ def get_all(
 ):
     return list_users(db)
 
+@router.get("/me", response_model=UserRead)
+def get_me(
+    current_user: User = Depends(get_current_user),
+):
+    return current_user
+
 
 @router.get("/{user_id}", response_model=UserRead)
 def get_by_id(
@@ -55,3 +61,4 @@ def get_by_id(
         raise HTTPException(status_code=404, detail="User not found")
 
     return user
+
