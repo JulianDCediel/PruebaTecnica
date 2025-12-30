@@ -155,3 +155,5 @@ _Deberás copiar el `access_token` de la respuesta para usarlo en las siguientes
 ## 📡 Deciciones 
 
 Al tener endpoints para crear usuarios, decidi poner un endpoint de /tasks el cual es para listar las tares de el usuario que esta llamando al endpoint, y el task/all para poder ver las tareas de todos
+
+## 📡 Proyecto desplegado en: https://pruebatecnica-kjmp.onrender.com/docs 
