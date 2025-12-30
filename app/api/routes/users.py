@@ -16,7 +16,11 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 
 @router.post("/", response_model=UserRead, status_code=status.HTTP_201_CREATED)
-def create(user: UserCreate, db: Session = Depends(get_db)):
+def create(
+    user: UserCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     existing = get_user_by_email(db, user.email)
     if existing:
         raise HTTPException(
