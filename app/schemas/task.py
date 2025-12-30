@@ -4,24 +4,21 @@ from datetime import datetime
 
 
 class TaskBase(BaseModel):
-    """
-    Campos comunes de una tarea.
-    """
     title: str = Field(..., min_length=1, max_length=100)
     description: Optional[str] = None
 
 
 class TaskCreate(TaskBase):
-    """
-    Esquema para crear tareas.
-    """
     pass
 
 
+class TaskUpdate(BaseModel):
+    title: str = Field(..., min_length=1, max_length=100)
+    description: str | None = None
+    completed: bool
+
+
 class TaskRead(TaskBase):
-    """
-    Esquema para devolver tareas.
-    """
     id: int
     completed: bool
     owner_id: int
@@ -29,3 +26,4 @@ class TaskRead(TaskBase):
 
     class Config:
         from_attributes = True
+

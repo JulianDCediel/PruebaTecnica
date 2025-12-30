@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
-from app.schemas.task import TaskCreate, TaskRead
+from app.schemas.task import TaskCreate, TaskRead, TaskUpdate
 from app.services.task_service import (
     create_task,
     get_task_by_id,
     list_tasks_by_user,
-    complete_task,
+    complete_task, update_task, delete_task,
 )
 from app.api.deps import get_current_user
 from app.models.user import User
@@ -45,6 +45,19 @@ def get_by_id(
 
     return task
 
+@router.put("/{task_id}", response_model=TaskRead)
+def update(
+    task_id: int,
+    task_data: TaskUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    task = get_task_by_id(db, task_id)
+
+    if not task or task.owner_id != current_user.id:
+        raise HTTPException(status_code=404, detail="Task not found")
+
+    return update_task(db, task, task_data)
 
 @router.patch("/{task_id}/complete", response_model=TaskRead)
 def complete(
@@ -58,3 +71,16 @@ def complete(
         raise HTTPException(status_code=404, detail="Task not found")
 
     return complete_task(db, task)
+
+@router.delete("/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete(
+    task_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    task = get_task_by_id(db, task_id)
+
+    if not task or task.owner_id != current_user.id:
+        raise HTTPException(status_code=404, detail="Task not found")
+
+    delete_task(db, task)
