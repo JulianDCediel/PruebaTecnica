@@ -115,9 +115,9 @@ _Deberás copiar el `access_token` de la respuesta para usarlo en las siguientes
 **Body (JSON):**
 ```json
 {
-  "email": "usuario@ejemplo.com",
-  "password": "password123",
-  "username": "usuario1"
+  "username": "string",
+  "email": "user@example.com",
+  "password": "string"
 }
 ```
 
