@@ -95,7 +95,7 @@ La documentación interactiva se encuentra en `http://localhost:8000/docs`.
 ## 📡 Pruebas con Postman
 
 Se recomienda utilizar **Postman** para probar la API. A continuación se detallan los endpoints principales y sus cuerpos de petición.
-
+Content-Type:application/json
 
 ### 1. Iniciar Sesión (Login)
 
