@@ -144,3 +144,14 @@ _Deberás copiar el `access_token` de la respuesta para usarlo en las siguientes
 **Auth:** Bearer Token
 
 ![Captura Listar Tareas](docs/list_tasks_screenshot.png)
+
+### 5. Listar Tareas paginacion
+
+**Endpoint:** `GET /tasks/?skip=0&limit=2`
+**Auth:** Bearer Token
+
+![Captura Listar Tareas](docs/list_tasks_pagination_screenshot.png)
+
+## 📡 Deciciones 
+
+Al tener endpoints para crear usuarios, decidi poner un endpoint de /tasks el cual es para listar las tares de el usuario que esta llamando al endpoint, y el task/all para poder ver las tareas de todos
